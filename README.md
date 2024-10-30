@@ -3,7 +3,7 @@
 ## API 명세서
 ### Schedules
 |기능|Method|URL|Request|Response|상태코드|
-|---|---|---|---|---|---|
+|----|---|---|---|---|---|
 |일정 생성|`POST`|/api/scedules|요청 body|등록 정보|200: 정상 등록, 400: 비정상 값|
 |전체 일정 조회|`GET`|/api/scedules| X |다건 응답 정보|200: 정상 조회, 500: 서버 비정상|
 |선택 일정 조회|`GET`|/api/scedules/{schedule_id}| X |단건 응답 정보|200: 정상 조회, 404: 일정이 사라짐|
@@ -22,53 +22,86 @@
       </tr>
       <tr>
         <td>POST</td></td>
-        <td >/api/scedules</td>
+        <td >/api/schedules</td>
       </tr>
     </table>
 
 
 - 예제
 
+    - 요청: POST /api/schedules
+   
+      ```json
+      {
+          "user_uid":"9788896a-96a4-11ef-a978-005056c00001",
+          "title" : "과제",
+          "content" : "꼭 해야함",
+          "color" : "일정 색상"
+      }
+      ```
 
-    ```json
-    {
-        "user_id":"9788896a-96a4-11ef-a978-005056c00001",
-        "title" : "과제",
-        "content" : "꼭 해야함",
-        "color" : "일정 색상"
-    }
-    ```
+    - 응답
+      
+       HTTP/1.1 200 OK
+      
+       ```json
+      {
+          "schedul_id":"1"
+      }
+      ```
 
-- 요청 : X
-
-- 응답
+- 본문
   
-  <table>
-      <tr>
-        <td><b>이름</b></td>
-        <td><b>타입</b></td>
-        <td><b>설명</b></td>
-      </tr>
-      <tr>
-        <td>id</td>
-        <td>String</td>
-        <td>유저 UUID</td>
-      </tr>
-      <tr>
-        <td>title</td>
-        <td>String</td>
-        <td>일정 제목</td>
-      </tr>
-      <tr>
-        <td>content</td>
-        <td>String</td>
-        <td>일정 내용</td>
-      </tr>
-      <tr>
-        <td>color</td>
-        <td>String</td>
-        <td>일정에 나타낼 색깔</td>
-      </tr>
+  - 요청
+    
+    <table>
+        <tr>
+          <td><b>이름</b></td>
+          <td><b>타입</b></td>
+          <td><b>설명</b></td>
+          <td><b>필수</b></td>
+        </tr>
+        <tr>
+          <td>user_uid</td>
+          <td>String</td>
+          <td>유저 UUID</td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>title</td>
+          <td>String</td>
+          <td>일정 제목</td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>content</td>
+          <td>String</td>
+          <td>일정 내용</td>
+          <td> X </td>
+        </tr>
+        <tr>
+          <td>color</td>
+          <td>String</td>
+          <td>일정에 나타낼 색깔</td>
+          <td> X </td>
+        </tr>
+      </table>
+
+  - 응답
+    
+    <table>
+        <tr>
+          <td><b>이름</b></td>
+          <td><b>타입</b></td>
+          <td><b>설명</b></td>
+          <td><b>필수</b></td>
+        </tr>
+        <tr>
+          <td>schedul_id</td>
+          <td>String</td>
+          <td>스케쥴의 ID</td>
+          <td> O </td>
+        </tr>
     </table>
   
     
@@ -93,74 +126,89 @@
 
 - 예제
 
+  - 요청 : X
 
+  - 응답
+ 
+    HTTP/1.1 200 OK
+    
     ```json
     "schedules" :[ {
         "schedule_id": "1",
-        "user_id": "9788896a-96a4-11ef-a978-005056c00001",
+        "user_uid": "9788896a-96a4-11ef-a978-005056c00001",
         "title" : "과제1",
         "content" : "꼭 해야함",
-        "color" : "Red",
+        "color" : "RED",
         "createdAt":"2024-10-30 18:51:53",
         "updatedAt":"2024-10-30 18:51:53"
     }, {
             "id": "2",
-            "user_id": "9788896a-96a4-11ef-a978-005056c00001",
+            "user_uid": "9788896a-96a4-11ef-a978-005056c00001",
             "title" : "과제2",
             "content" : "나중에 해야함",
-            "color" : "Blue",
+            "color" : "BLUE",
             "createdAt":"2024-10-30 18:52:53"
             "updatedAt":"2024-10-30 18:52:53"
         },
     ]
     ```
 
-- 요청 : X
-
-- 응답
+- 본문
   
-  <table>
-      <tr>
-        <td><b>이름</b></td>
-        <td><b>타입</b></td>
-        <td><b>설명</b></td>
-      </tr>
-      <tr>
-        <td>schedule_id</td>
-        <td>String</td>
-        <td> 일정의 id </td>
-      </tr>
-      <tr>
-        <td>user_id</td>
-        <td>String</td>
-        <td> 유저의 id </td>
-      </tr>
-      <tr>
-        <td>title</td>
-        <td>String</td>
-        <td>일정 제목</td>
-      </tr>
-      <tr>
-        <td>content</td>
-        <td>String</td>
-        <td>일정 내용</td>
-      </tr>
-      <tr>
-        <td>color</td>
-        <td>String</td>
-        <td>일정에 나타낼 색깔깔</td>
-      </tr>
-      <tr>
-        <td>createdAt</td>
-        <td>String</td>
-        <td>일정의 생성 날짜 timestamp</td>
-      </tr>
-      <tr>
-        <td>updatedAt</td>
-        <td>String</td>
-        <td>일정의 수정 날짜 timestamp</td>
-      </tr>
-    </table>
+  - 요청 : X
+
+  - 응답
+  
+    <table>
+        <tr>
+          <td><b>이름</b></td>
+          <td><b>타입</b></td>
+          <td><b>설명</b></td>
+          <td><b>필수</b></td>
+        </tr>
+        <tr>
+          <td>schedule_id</td>
+          <td>String</td>
+          <td> 일정의 ID </td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>user_uid</td>
+          <td>String</td>
+          <td> 유저 UID </td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>title</td>
+          <td>String</td>
+          <td>일정 제목</td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>content</td>
+          <td>String</td>
+          <td>일정 내용</td>
+          <td> X </td>
+        </tr>
+        <tr>
+          <td>color</td>
+          <td>String</td>
+          <td>일정에 나타낼 색깔</td>
+          <td> X </td>
+        </tr>
+        <tr>
+          <td>createdAt</td>
+          <td>String</td>
+          <td>일정의 생성 날짜 TIMESTAMP</td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>updatedAt</td>
+          <td>String</td>
+          <td>일정의 수정 날짜 TIMESTAMP</td>
+          <td> X </td>
+        </tr>
+      </table>
 
     
 </details>
@@ -184,78 +232,93 @@
 
 - 예제
 
+  - 요청: GET /api/schedules/{schedule_id}
+
+  - 응답
+ 
+    HTTP/1.1 200 OK
 
     ```json
      {
         "schedule_id": "1",
-        "user_id": "9788896a-96a4-11ef-a978-005056c00001",
+        "user_uid": "9788896a-96a4-11ef-a978-005056c00001",
         "title" : "과제1",
         "content" : "꼭 해야함",
-        "color" : "Red",
+        "color" : "RED",
         "createdAt":"2024-10-30 18:51:53",
         "updatedAt":"2024-10-30 18:51:53"
     }
     ```
+- 본문
+  - 요청 
+      
+      <table>
+        <tr>
+          <td><b>이름</b></td>
+          <td><b>타입</b></td>
+          <td><b>설명</b></td>
+          <td> 필수 </td>
+        </tr>
+        <tr>
+          <td>schedule_id</td>
+          <td>String</td>
+          <td> 일정 id </td>
+          <td> O </td>
+        </tr>
+      </table>
 
-- 요청 : {schedule_id}
+  - 응답
     
     <table>
-      <tr>
-        <td><b>이름</b></td>
-        <td><b>타입</b></td>
-        <td><b>설명</b></td>
-      </tr>
-      <tr>
-        <td>schedule_id</td>
-        <td>String</td>
-        <td> 일정 id </td>
-      </tr>
-    </table>
-
-- 응답
-  
-  <table>
-      <tr>
-        <td><b>이름</b></td>
-        <td><b>타입</b></td>
-        <td><b>설명</b></td>
-      </tr>
-      <tr>
-        <td>schedule_id</td>
-        <td>String</td>
-        <td> 일정 id </td>
-      </tr>
-      <tr>
-        <td>user_id</td>
-        <td>String</td>
-        <td> 유저의 id </td>
-      </tr>
-      <tr>
-        <td>title</td>
-        <td>String</td>
-        <td>일정 제목</td>
-      </tr>
-      <tr>
-        <td>content</td>
-        <td>String</td>
-        <td>일정 내용</td>
-      </tr>
-      <tr>
-        <td>color</td>
-        <td>String</td>
-        <td>일정에 나타낼 색깔깔</td>
-      </tr>
-      <tr>
-        <td>createdAt</td>
-        <td>String</td>
-        <td>일정의 생성 날짜 timestamp</td>
-      </tr>
-      <tr>
-        <td>updatedAt</td>
-        <td>String</td>
-        <td>일정의 수정 날짜 timestamp</td>
-      </tr>
-    </table>
+        <tr>
+          <td><b>이름</b></td>
+          <td><b>타입</b></td>
+          <td><b>설명</b></td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>schedule_id</td>
+          <td>String</td>
+          <td> 일정 id </td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>user_uid</td>
+          <td>String</td>
+          <td> 유저의 id </td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>title</td>
+          <td>String</td>
+          <td>일정 제목</td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>content</td>
+          <td>String</td>
+          <td>일정 내용</td>
+          <td> X </td>
+        </tr>
+        <tr>
+          <td>color</td>
+          <td>String</td>
+          <td>일정에 나타낼 색깔깔</td>
+          <td> X </td>
+        </tr>
+        <tr>
+          <td>createdAt</td>
+          <td>String</td>
+          <td>일정의 생성 날짜 timestamp</td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>updatedAt</td>
+          <td>String</td>
+          <td>일정의 수정 날짜 timestamp</td>
+          <td> X </td>
+        </tr>
+      </table>
 
     
 </details>
@@ -279,71 +342,85 @@
 
 - 예제
 
+  - 요청: PUT /api/schedules/{schedule_id}
+  
+    ```json
+       {
+          "schedule_id": "1",
+          "user_uid": "9788896a-96a4-11ef-a978-005056c00001",
+          "title" : "과제1",
+          "content" : "꼭 해야함",
+          "color" : "Red"
+      }
+    ```
+  - 응답
+
+    HTTP/1.1 200 OK
 
     ```json
      {
-        "schedule_id": "1",
-        "user_id": "9788896a-96a4-11ef-a978-005056c00001",
-        "title" : "과제1",
-        "content" : "꼭 해야함",
-        "color" : "Red",
-        "updatedAt":"2024-10-30 18:51:53"
-    }
+        "schedul_id":"1"
+      }
     ```
 
-- 요청 : {schedule_id}
+- 본문
+
+  - 요청 
     
     <table>
-      <tr>
-        <td><b>이름</b></td>
-        <td><b>타입</b></td>
-        <td><b>설명</b></td>
-      </tr>
-      <tr>
-        <td>schedule_id</td>
-        <td>String</td>
-        <td> 일정 id </td>
-      </tr>
-    </table>
-
-- 응답
+        <tr>
+          <td><b>이름</b></td>
+          <td><b>타입</b></td>
+          <td><b>설명</b></td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>schedule_id</td>
+          <td>String</td>
+          <td> 일정 id </td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>user_uid</td>
+          <td>String</td>
+          <td> 유저의 uid </td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>title</td>
+          <td>String</td>
+          <td>일정 제목</td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>content</td>
+          <td>String</td>
+          <td>일정 내용</td>
+          <td> X </td>
+        </tr>
+        <tr>
+          <td>color</td>
+          <td>String</td>
+          <td>일정에 나타낼 색깔</td>
+          <td> X </td>
+        </tr>
+      </table>
   
-  <table>
-      <tr>
-        <td><b>이름</b></td>
-        <td><b>타입</b></td>
-        <td><b>설명</b></td>
-      </tr>
-      <tr>
-        <td>schedule_id</td>
-        <td>String</td>
-        <td> 일정 id </td>
-      </tr>
-      <tr>
-        <td>user_id</td>
-        <td>String</td>
-        <td> 유저의 id </td>
-      </tr>
-      <tr>
-        <td>title</td>
-        <td>String</td>
-        <td>일정 제목</td>
-      </tr>
-      <tr>
-        <td>content</td>
-        <td>String</td>
-        <td>일정 내용</td>
-      </tr>
-      <tr>
-        <td>color</td>
-        <td>String</td>
-        <td>일정에 나타낼 색깔깔</td>
-      </tr>
-      <tr>
-        <td>updatedAt</td>
-        <td>String</td>
-        <td>일정의 수정 날짜 timestamp</td>
-      </tr>
+  - 응답
+    
+    <table>
+        <tr>
+          <td><b>이름</b></td>
+          <td><b>타입</b></td>
+          <td><b>설명</b></td>
+          <td><b>필수</b></td>
+        </tr>
+        <tr>
+          <td>schedul_id</td>
+          <td>String</td>
+          <td>스케쥴의 ID</td>
+          <td> O </td>
+        </tr>
     </table>
 
 </details>
@@ -364,22 +441,54 @@
       </tr>
     </table>
 
-- 요청 : {schedule_id}
-    
-    <table>
-      <tr>
-        <td><b>이름</b></td>
-        <td><b>타입</b></td>
-        <td><b>설명</b></td>
-      </tr>
-      <tr>
-        <td>schedule_id</td>
-        <td>String</td>
-        <td> 일정 id </td>
-      </tr>
-    </table>
+- 예제
 
-- 응답 : X
+  - 요청: DELETE /api/schedules/{schedule_id}
+ 
+  - 응답
+ 
+    HTTP/1.1 200 OK
+
+    ```json
+     {
+        "schedul_id":"1"
+      }
+    ```
+- 본문
+    
+  - 요청
+      
+      <table>
+        <tr>
+          <td><b>이름</b></td>
+          <td><b>타입</b></td>
+          <td><b>설명</b></td>
+          <td><b>필수</b></td>
+        </tr>
+        <tr>
+          <td>schedule_id</td>
+          <td>String</td>
+          <td> 일정 id </td>
+          <td> O </td>
+        </tr>
+      </table>
+  
+  - 응답
+ 
+     <table>
+        <tr>
+          <td><b>이름</b></td>
+          <td><b>타입</b></td>
+          <td><b>설명</b></td>
+          <td><b>필수</b></td>
+        </tr>
+        <tr>
+          <td>schedule_id</td>
+          <td>String</td>
+          <td> 일정 id </td>
+          <td> O </td>
+        </tr>
+      </table>
 
     
 </details>
@@ -413,29 +522,15 @@
 
     ```json
      {
-        "schedule_id": "1",
-        "user_id": "9788896a-96a4-11ef-a978-005056c00001",
-        "title" : "과제1",
-        "content" : "꼭 해야함",
-        "color" : "Red",
-        "updatedAt":"2024-10-30 18:51:53"
+        "uid": "9788896a-96a4-11ef-a978-005056c00001",
+        "id": "tyh343",
+        "password": "tghf",
+        "name": "kim",
+        "email" : "kimsparta@sparta.co.kr"
     }
     ```
 
-- 요청 : {schedule_id}
-    
-    <table>
-      <tr>
-        <td><b>이름</b></td>
-        <td><b>타입</b></td>
-        <td><b>설명</b></td>
-      </tr>
-      <tr>
-        <td>schedule_id</td>
-        <td>String</td>
-        <td> 일정 id </td>
-      </tr>
-    </table>
+- 요청 : X
 
 - 응답
   
@@ -451,35 +546,159 @@
         <td> 일정 id </td>
       </tr>
       <tr>
-        <td>user_id</td>
+        <td>uid</td>
         <td>String</td>
-        <td> 유저의 id </td>
+        <td> 유저 UUID</td>
       </tr>
       <tr>
-        <td>title</td>
+        <td>id</td>
         <td>String</td>
-        <td>일정 제목</td>
+        <td>유저의 ID</td>
       </tr>
       <tr>
-        <td>content</td>
+        <td>password</td>
         <td>String</td>
-        <td>일정 내용</td>
+        <td>유저의 패스워드</td>
       </tr>
       <tr>
-        <td>color</td>
+        <td>name</td>
         <td>String</td>
-        <td>일정에 나타낼 색깔깔</td>
+        <td>유저의 이름</td>
       </tr>
       <tr>
-        <td>updatedAt</td>
+        <td>email</td>
         <td>String</td>
-        <td>일정의 수정 날짜 timestamp</td>
+        <td>유저의 EMAIL</td>
       </tr>
     </table>
 
     
 </details>
 
+<details>
+  <summary><b>유저 정보 조회</b></summary>
+    
+- 기본정보
+  
+    <table>
+      <tr>
+        <td ><b>메소드</b></td>
+        <td ><b>요청 URL</b></td>
+      </tr>
+      <tr>
+        <td>GET</td></td>
+        <td >/api/users/{Id}</td>
+      </tr>
+    </table>
+
+
+- 예제
+
+
+    ```json
+     {
+        "id": "tyh343",
+        "name": "kim",
+        "email" : "kimsparta@sparta.co.kr"
+    }
+    ```
+
+- 요청 : {Id}
+  
+    <table>
+      <tr>
+        <td><b>이름</b></td>
+        <td><b>타입</b></td>
+        <td><b>설명</b></td>
+      </tr>
+      <tr>
+        <td>Id</td>
+        <td>String</td>
+        <td> 유저의 아이디 </td>
+      </tr>
+    </table>
+
+- 응답
+  
+  <table>
+      <tr>
+        <td><b>이름</b></td>
+        <td><b>타입</b></td>
+        <td><b>설명</b></td>
+      </tr>
+      <tr>
+        <td>id</td>
+        <td>String</td>
+        <td>유저의 ID</td>
+      </tr>
+      <tr>
+        <td>name</td>
+        <td>String</td>
+        <td>유저의 이름</td>
+      </tr>
+      <tr>
+        <td>email</td>
+        <td>String</td>
+        <td>유저의 EMAIL</td>
+      </tr>
+    </table>
+
+    
+</details>
+
+<details>
+  <summary><b>유저 수정</b></summary>
+    
+- 기본정보
+  
+    <table>
+      <tr>
+        <td ><b>메소드</b></td>
+        <td ><b>요청 URL</b></td>
+      </tr>
+      <tr>
+        <td>POST</td></td>
+        <td >/api/users/{id}</td>
+      </tr>
+    </table>
+
+
+- 예제
+
+
+    ```json
+     {
+        "name": "kim",
+        "email" : "kimsparta@sparta.co.kr"
+    }
+    ```
+
+- 요청 : {id}
+
+    <table>
+      <tr>
+        <td><b>이름</b></td>
+        <td><b>타입</b></td>
+        <td><b>설명</b></td>
+      </tr>
+      <tr>
+        <td>name</td>
+        <td>String</td>
+        <td>유저의 이름</td>
+      </tr>
+      <tr>
+        <td>email</td>
+        <td>String</td>
+        <td>유저의 EMAIL</td>
+      </tr>
+    </table>
+
+- 응답
+  
+
+
+    
+</details>
 
 
 ---
