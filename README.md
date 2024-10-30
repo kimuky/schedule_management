@@ -10,12 +10,477 @@
 |선택 일정 수정|`PUT`|/api/scedules/{schedule_id}|요청 body|수정 정보|200: 정상등록, 400: 비정상 값, 404: 일정이 사라짐|
 |선택 일정 삭제|`DELETE`|/api/scedules/{schedule_id}| X | X |204: 정상 등록, 404: 일정이 사라짐|
 
+<details>
+  <summary><b>일정 생성</b></summary>
+    
+- 기본정보
+  
+    <table>
+      <tr>
+        <td ><b>메소드</b></td>
+        <td ><b>요청 URL</b></td>
+      </tr>
+      <tr>
+        <td>POST</td></td>
+        <td >/api/scedules</td>
+      </tr>
+    </table>
+
+
+- 예제
+
+
+    ```json
+    {
+        "user_id":"9788896a-96a4-11ef-a978-005056c00001",
+        "title" : "과제",
+        "content" : "꼭 해야함",
+        "color" : "일정 색상"
+    }
+    ```
+
+- 요청 : X
+
+- 응답
+  
+  <table>
+      <tr>
+        <td><b>이름</b></td>
+        <td><b>타입</b></td>
+        <td><b>설명</b></td>
+      </tr>
+      <tr>
+        <td>id</td>
+        <td>String</td>
+        <td>유저 UUID</td>
+      </tr>
+      <tr>
+        <td>title</td>
+        <td>String</td>
+        <td>일정 제목</td>
+      </tr>
+      <tr>
+        <td>content</td>
+        <td>String</td>
+        <td>일정 내용</td>
+      </tr>
+      <tr>
+        <td>color</td>
+        <td>String</td>
+        <td>일정에 나타낼 색깔</td>
+      </tr>
+    </table>
+  
+    
+</details>
+
+<details>
+  <summary><b>전체 일정 조회 </b></summary>
+
+- 기본정보
+  
+    <table>
+      <tr>
+        <td ><b>메소드</b></td>
+        <td ><b>요청 URL</b></td>
+      </tr>
+      <tr>
+        <td>GET</td></td>
+        <td >/api/scedules</td>
+      </tr>
+    </table>
+
+
+- 예제
+
+
+    ```json
+    "schedules" :[ {
+        "schedule_id": "1",
+        "user_id": "9788896a-96a4-11ef-a978-005056c00001",
+        "title" : "과제1",
+        "content" : "꼭 해야함",
+        "color" : "Red",
+        "createdAt":"2024-10-30 18:51:53",
+        "updatedAt":"2024-10-30 18:51:53"
+    }, {
+            "id": "2",
+            "user_id": "9788896a-96a4-11ef-a978-005056c00001",
+            "title" : "과제2",
+            "content" : "나중에 해야함",
+            "color" : "Blue",
+            "createdAt":"2024-10-30 18:52:53"
+            "updatedAt":"2024-10-30 18:52:53"
+        },
+    ]
+    ```
+
+- 요청 : X
+
+- 응답
+  
+  <table>
+      <tr>
+        <td><b>이름</b></td>
+        <td><b>타입</b></td>
+        <td><b>설명</b></td>
+      </tr>
+      <tr>
+        <td>schedule_id</td>
+        <td>String</td>
+        <td> 일정의 id </td>
+      </tr>
+      <tr>
+        <td>user_id</td>
+        <td>String</td>
+        <td> 유저의 id </td>
+      </tr>
+      <tr>
+        <td>title</td>
+        <td>String</td>
+        <td>일정 제목</td>
+      </tr>
+      <tr>
+        <td>content</td>
+        <td>String</td>
+        <td>일정 내용</td>
+      </tr>
+      <tr>
+        <td>color</td>
+        <td>String</td>
+        <td>일정에 나타낼 색깔깔</td>
+      </tr>
+      <tr>
+        <td>createdAt</td>
+        <td>String</td>
+        <td>일정의 생성 날짜 timestamp</td>
+      </tr>
+      <tr>
+        <td>updatedAt</td>
+        <td>String</td>
+        <td>일정의 수정 날짜 timestamp</td>
+      </tr>
+    </table>
+
+    
+</details>
+
+<details>
+  <summary><b>선택 일정 조회 </b></summary>
+
+- 기본정보
+  
+    <table>
+      <tr>
+        <td ><b>메소드</b></td>
+        <td ><b>요청 URL</b></td>
+      </tr>
+      <tr>
+        <td>GET</td></td>
+        <td >/api/scedules/{schedule_id}</td>
+      </tr>
+    </table>
+
+
+- 예제
+
+
+    ```json
+     {
+        "schedule_id": "1",
+        "user_id": "9788896a-96a4-11ef-a978-005056c00001",
+        "title" : "과제1",
+        "content" : "꼭 해야함",
+        "color" : "Red",
+        "createdAt":"2024-10-30 18:51:53",
+        "updatedAt":"2024-10-30 18:51:53"
+    }
+    ```
+
+- 요청 : {schedule_id}
+    
+    <table>
+      <tr>
+        <td><b>이름</b></td>
+        <td><b>타입</b></td>
+        <td><b>설명</b></td>
+      </tr>
+      <tr>
+        <td>schedule_id</td>
+        <td>String</td>
+        <td> 일정 id </td>
+      </tr>
+    </table>
+
+- 응답
+  
+  <table>
+      <tr>
+        <td><b>이름</b></td>
+        <td><b>타입</b></td>
+        <td><b>설명</b></td>
+      </tr>
+      <tr>
+        <td>schedule_id</td>
+        <td>String</td>
+        <td> 일정 id </td>
+      </tr>
+      <tr>
+        <td>user_id</td>
+        <td>String</td>
+        <td> 유저의 id </td>
+      </tr>
+      <tr>
+        <td>title</td>
+        <td>String</td>
+        <td>일정 제목</td>
+      </tr>
+      <tr>
+        <td>content</td>
+        <td>String</td>
+        <td>일정 내용</td>
+      </tr>
+      <tr>
+        <td>color</td>
+        <td>String</td>
+        <td>일정에 나타낼 색깔깔</td>
+      </tr>
+      <tr>
+        <td>createdAt</td>
+        <td>String</td>
+        <td>일정의 생성 날짜 timestamp</td>
+      </tr>
+      <tr>
+        <td>updatedAt</td>
+        <td>String</td>
+        <td>일정의 수정 날짜 timestamp</td>
+      </tr>
+    </table>
+
+    
+</details>
+
+<details>
+  <summary><b>선택 일정 수정 </b></summary>
+
+- 기본정보
+  
+    <table>
+      <tr>
+        <td ><b>메소드</b></td>
+        <td ><b>요청 URL</b></td>
+      </tr>
+      <tr>
+        <td>GET</td></td>
+        <td >/api/scedules/{schedule_id}</td>
+      </tr>
+    </table>
+
+
+- 예제
+
+
+    ```json
+     {
+        "schedule_id": "1",
+        "user_id": "9788896a-96a4-11ef-a978-005056c00001",
+        "title" : "과제1",
+        "content" : "꼭 해야함",
+        "color" : "Red",
+        "updatedAt":"2024-10-30 18:51:53"
+    }
+    ```
+
+- 요청 : {schedule_id}
+    
+    <table>
+      <tr>
+        <td><b>이름</b></td>
+        <td><b>타입</b></td>
+        <td><b>설명</b></td>
+      </tr>
+      <tr>
+        <td>schedule_id</td>
+        <td>String</td>
+        <td> 일정 id </td>
+      </tr>
+    </table>
+
+- 응답
+  
+  <table>
+      <tr>
+        <td><b>이름</b></td>
+        <td><b>타입</b></td>
+        <td><b>설명</b></td>
+      </tr>
+      <tr>
+        <td>schedule_id</td>
+        <td>String</td>
+        <td> 일정 id </td>
+      </tr>
+      <tr>
+        <td>user_id</td>
+        <td>String</td>
+        <td> 유저의 id </td>
+      </tr>
+      <tr>
+        <td>title</td>
+        <td>String</td>
+        <td>일정 제목</td>
+      </tr>
+      <tr>
+        <td>content</td>
+        <td>String</td>
+        <td>일정 내용</td>
+      </tr>
+      <tr>
+        <td>color</td>
+        <td>String</td>
+        <td>일정에 나타낼 색깔깔</td>
+      </tr>
+      <tr>
+        <td>updatedAt</td>
+        <td>String</td>
+        <td>일정의 수정 날짜 timestamp</td>
+      </tr>
+    </table>
+
+</details>
+
+<details>
+  <summary><b>선택 일정 삭제 </b></summary>
+
+- 기본정보
+  
+    <table>
+      <tr>
+        <td ><b>메소드</b></td>
+        <td ><b>요청 URL</b></td>
+      </tr>
+      <tr>
+        <td>GET</td></td>
+        <td >/api/scedules/{schedule_id}</td>
+      </tr>
+    </table>
+
+- 요청 : {schedule_id}
+    
+    <table>
+      <tr>
+        <td><b>이름</b></td>
+        <td><b>타입</b></td>
+        <td><b>설명</b></td>
+      </tr>
+      <tr>
+        <td>schedule_id</td>
+        <td>String</td>
+        <td> 일정 id </td>
+      </tr>
+    </table>
+
+- 응답 : X
+
+    
+</details>
+
 ### Users
 |기능|Method|URL|Request|Response|상태코드|
 |---|---|---|---|---|---|
 |유저 등록|`POST`|/api/users|요청 body|등록 정보|200: 정상 등록, 400: 비정상 값|
 |유저 정보 조회|`GET`|/api/users/{Id}| X |단건 응답 정보|200: 정상 조회, 404: 일정이 사라짐|
 |유저 수정|`PUT`|/api/users/{id}|요청 body|수정 정보|200: 정상등록, 400: 비정상 값, 404: 일정이 사라짐|
+
+<details>
+  <summary><b>유저 등록</b></summary>
+    
+- 기본정보
+  
+    <table>
+      <tr>
+        <td ><b>메소드</b></td>
+        <td ><b>요청 URL</b></td>
+      </tr>
+      <tr>
+        <td>POST</td></td>
+        <td >/api/users</td>
+      </tr>
+    </table>
+
+
+- 예제
+
+
+    ```json
+     {
+        "schedule_id": "1",
+        "user_id": "9788896a-96a4-11ef-a978-005056c00001",
+        "title" : "과제1",
+        "content" : "꼭 해야함",
+        "color" : "Red",
+        "updatedAt":"2024-10-30 18:51:53"
+    }
+    ```
+
+- 요청 : {schedule_id}
+    
+    <table>
+      <tr>
+        <td><b>이름</b></td>
+        <td><b>타입</b></td>
+        <td><b>설명</b></td>
+      </tr>
+      <tr>
+        <td>schedule_id</td>
+        <td>String</td>
+        <td> 일정 id </td>
+      </tr>
+    </table>
+
+- 응답
+  
+  <table>
+      <tr>
+        <td><b>이름</b></td>
+        <td><b>타입</b></td>
+        <td><b>설명</b></td>
+      </tr>
+      <tr>
+        <td>schedule_id</td>
+        <td>String</td>
+        <td> 일정 id </td>
+      </tr>
+      <tr>
+        <td>user_id</td>
+        <td>String</td>
+        <td> 유저의 id </td>
+      </tr>
+      <tr>
+        <td>title</td>
+        <td>String</td>
+        <td>일정 제목</td>
+      </tr>
+      <tr>
+        <td>content</td>
+        <td>String</td>
+        <td>일정 내용</td>
+      </tr>
+      <tr>
+        <td>color</td>
+        <td>String</td>
+        <td>일정에 나타낼 색깔깔</td>
+      </tr>
+      <tr>
+        <td>updatedAt</td>
+        <td>String</td>
+        <td>일정의 수정 날짜 timestamp</td>
+      </tr>
+    </table>
+
+    
+</details>
+
+
 
 ---
 
