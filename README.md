@@ -1,28 +1,30 @@
 # Schedule_management
 
 ## API 명세서
-
 ### Schedules
 |기능|Method|URL|Request|Response|상태코드|
 |---|---|---|---|---|---|
-|테스트1|테스트2|테스트3|테스트1|테스트2|테스트3|
-|테스트1|테스트2|테스트3|테스트1|테스트2|테스트3|
-|테스트1|테스트2|테스트3|테스트1|테스트2|테스트3|
+|일정 생성|`POST`|/api/scedules|요청 body|등록 정보|200: 정상 등록, 400: 비정상 값|
+|전체 일정 조회|`GET`|/api/scedules| X |다건 응답 정보|200: 정상 조회, 500: 서버 비정상|
+|선택 일정 조회|`GET`|/api/scedules/{schedule_id}| X |단건 응답 정보|200: 정상 조회, 404: 일정이 사라짐|
+|선택 일정 수정|`PUT`|/api/scedules/{schedule_id}|요청 body|수정 정보|200: 정상등록, 400: 비정상 값, 404: 일정이 사라짐|
+|선택 일정 삭제|`DELETE`|/api/scedules/{schedule_id}| X | X |204: 정상 등록, 404: 일정이 사라짐|
 
-### Schedules
+### Users
 |기능|Method|URL|Request|Response|상태코드|
 |---|---|---|---|---|---|
-|테스트1|테스트2|테스트3|테스트1|테스트2|테스트3|
-|테스트1|테스트2|테스트3|테스트1|테스트2|테스트3|
-|테스트1|테스트2|테스트3|테스트1|테스트2|테스트3|
+|유저 등록|`POST`|/api/users|요청 body|등록 정보|200: 정상 등록, 400: 비정상 값|
+|유저 정보 조회|`GET`|/api/users/{Id}| X |단건 응답 정보|200: 정상 조회, 404: 일정이 사라짐|
+|유저 수정|`PUT`|/api/users/{id}|요청 body|수정 정보|200: 정상등록, 400: 비정상 값, 404: 일정이 사라짐|
 
+---
 
 ## ERD
 
 ![image](https://github.com/user-attachments/assets/2c2f5c5c-755d-40b7-a394-1a88c5c28dac)
 
 
-
+---
 
 ## SQL
 
