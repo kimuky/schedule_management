@@ -5,7 +5,7 @@
 |기능|Method|URL|Request|Response|상태코드|
 |----|---|---|---|---|---|
 |일정 생성|`POST`|/api/scedules|요청 body|등록 정보|200: 정상 등록, 400: 비정상 값|
-|전체 일정 조회|`GET`|/api/scedules| X |다건 응답 정보|200: 정상 조회, 500: 서버 비정상|
+|전체 일정 조회|`GET`|/api/scedules| X |다건 응답 정보|200: 정상 조회|
 |선택 일정 조회|`GET`|/api/scedules/{schedule_id}| X |단건 응답 정보|200: 정상 조회, 404: 일정이 사라짐|
 |선택 일정 수정|`PUT`|/api/scedules/{schedule_id}|요청 body|수정 정보|200: 정상등록, 400: 비정상 값, 404: 일정이 사라짐|
 |선택 일정 삭제|`DELETE`|/api/scedules/{schedule_id}| X | X |204: 정상 등록, 404: 일정이 사라짐|
