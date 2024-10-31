@@ -847,16 +847,16 @@ SELECT * FROM schedules WHERE id = 1;
 
 ```sql
 -- Update schedules with id 1
-UPDATE schedules SET color = "BLUE" WHERE id = 1;
-)
+UPDATE schedules SET color = "BLUE", update_date = current_timestamp() WHERE id = 1;
+
 
 -- Update schedules with id 2
-UPDATE schedules SET title = "important subject" WHERE id = 2;
-)
+UPDATE schedules SET title = "important subject", update_date = current_timestamp() WHERE id = 2;
+
 
 -- Update users with uid "9788896a-96a4-11ef-a978-005056c00001"
-UPDATE users SET name = "taehuyn" WHERE uid = "9788896a-96a4-11ef-a978-005056c00001";
-)
+UPDATE users SET name = "taehuyn", update_date = current_timestamp() WHERE uid = "9788896a-96a4-11ef-a978-005056c00001";
+
 
 ```
 
