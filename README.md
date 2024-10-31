@@ -524,7 +524,6 @@
     
     ```json
      {
-        "uid": "9788896a-96a4-11ef-a978-005056c00001",
         "user_id": "tyh343",
         "password": "tghf",
         "name": "kim",
@@ -552,12 +551,6 @@
           <td><b>타입</b></td>
           <td><b>설명</b></td>
           <td><b>필수</b></td>
-        </tr>
-        <tr>
-          <td>uid</td>
-          <td>String</td>
-          <td> 유저 UUID</td>
-          <td> O </td>
         </tr>
         <tr>
           <td>user_id</td>
@@ -790,7 +783,8 @@
 ```sql
 -- Create users table
 CREATE TABLE users (
-    id char(36) NOT NULL PRIMARY KEY,
+    uid char(36) NOT NULL PRIMARY KEY,
+    id varchar(45) NOT NULL,
     name varchar(20) NOT NULL,
     email varchar(45),
     create_date TIMESTAMP NOT NULL,
@@ -800,7 +794,7 @@ CREATE TABLE users (
 -- Create schedules table
 CREATE TABLE schedules (
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    user_id char(36) NOT NULL,
+    user_uid char(36) NOT NULL,
     title varchar(20) NOT NULL,
     content varchar(100),
     color varchar(20),
@@ -815,16 +809,16 @@ CREATE TABLE schedules (
 
 ```sql
 -- Insert users
-INSERT INTO users (id, name, email, create_date)
-VALUES (UUID(),"kim", "sparta@teamsparta.co.kr", current_timestamp());
+INSERT INTO user (uid, id, password, name, email, create_date)
+VALUES (UUID(), "tsd123", "tyghbn","kim", "sparta@teamsparta.co.kr", current_timestamp());
 
 -- Insert schedules
-INSERT INTO schedule (user_id, title, content,color, create_date)
-VALUES ("9788896a-96a4-11ef-a978-005056c00001","과제", "sql, erd","red", current_timestamp());
+INSERT INTO schedule (user_uid, title, content,color, create_date)
+VALUES ("f953a76c-9732-11ef-a978-005056c00001","과제", "sql, erd","RED", current_timestamp());
 
 -- Insert schedules without color
-INSERT INTO schedule (user_id, title, content, create_date)
-VALUES ("9788896a-96a4-11ef-a978-005056c00001","코드카타", "dfs, bfs", current_timestamp());
+INSERT INTO schedule (user_uid, title, content, create_date)
+VALUES ("f953a76c-9732-11ef-a978-005056c00001","과제", "sql, erd", current_timestamp());
 
 
 )
@@ -853,15 +847,15 @@ SELECT * FROM schedules WHERE id = 1;
 
 ```sql
 -- Update schedules with id 1
-UPDATE schedules SET color = "blue" WHERE id = 1;
+UPDATE schedules SET color = "BLUE" WHERE id = 1;
 )
 
 -- Update schedules with id 2
 UPDATE schedules SET title = "important subject" WHERE id = 2;
 )
 
--- Update users with id 9788896a-96a4-11ef-a978-005056c00001
-UPDATE users SET name = "taehuyn" WHERE id = "9788896a-96a4-11ef-a978-005056c00001";
+-- Update users with uid "9788896a-96a4-11ef-a978-005056c00001"
+UPDATE users SET name = "taehuyn" WHERE uid = "9788896a-96a4-11ef-a978-005056c00001";
 )
 
 ```
