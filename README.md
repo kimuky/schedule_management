@@ -250,6 +250,7 @@
     }
     ```
 - 본문
+  
   - 요청 
       
       <table>
@@ -497,8 +498,8 @@
 |기능|Method|URL|Request|Response|상태코드|
 |---|---|---|---|---|---|
 |유저 등록|`POST`|/api/users|요청 body|등록 정보|200: 정상 등록, 400: 비정상 값|
-|유저 정보 조회|`GET`|/api/users/{Id}| X |단건 응답 정보|200: 정상 조회, 404: 일정이 사라짐|
-|유저 수정|`PUT`|/api/users/{id}|요청 body|수정 정보|200: 정상등록, 400: 비정상 값, 404: 일정이 사라짐|
+|유저 정보 조회|`GET`|/api/users/{user_Id}| X |단건 응답 정보|200: 정상 조회, 404: 일정이 사라짐|
+|유저 수정|`PUT`|/api/users/{user_id}|요청 body|수정 정보|200: 정상등록, 400: 비정상 값, 404: 일정이 사라짐|
 
 <details>
   <summary><b>유저 등록</b></summary>
@@ -519,58 +520,87 @@
 
 - 예제
 
-
+  - 요청
+    
     ```json
      {
         "uid": "9788896a-96a4-11ef-a978-005056c00001",
-        "id": "tyh343",
+        "user_id": "tyh343",
         "password": "tghf",
         "name": "kim",
         "email" : "kimsparta@sparta.co.kr"
     }
     ```
 
-- 요청 : X
+  - 응답
+    
+    HTTP/1.1 200 OK
+    
+    ```json
+     {
+        "uid": "9788896a-96a4-11ef-a978-005056c00001",
+      }
+    ```
 
-- 응답
+- 본문
   
-  <table>
-      <tr>
-        <td><b>이름</b></td>
-        <td><b>타입</b></td>
-        <td><b>설명</b></td>
-      </tr>
-      <tr>
-        <td>schedule_id</td>
-        <td>String</td>
-        <td> 일정 id </td>
-      </tr>
-      <tr>
-        <td>uid</td>
-        <td>String</td>
-        <td> 유저 UUID</td>
-      </tr>
-      <tr>
-        <td>id</td>
-        <td>String</td>
-        <td>유저의 ID</td>
-      </tr>
-      <tr>
-        <td>password</td>
-        <td>String</td>
-        <td>유저의 패스워드</td>
-      </tr>
-      <tr>
-        <td>name</td>
-        <td>String</td>
-        <td>유저의 이름</td>
-      </tr>
-      <tr>
-        <td>email</td>
-        <td>String</td>
-        <td>유저의 EMAIL</td>
-      </tr>
-    </table>
+  - 요청
+  
+    <table>
+        <tr>
+          <td><b>이름</b></td>
+          <td><b>타입</b></td>
+          <td><b>설명</b></td>
+          <td><b>필수</b></td>
+        </tr>
+        <tr>
+          <td>uid</td>
+          <td>String</td>
+          <td> 유저 UUID</td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>user_id</td>
+          <td>String</td>
+          <td>유저의 ID</td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>password</td>
+          <td>String</td>
+          <td>유저의 패스워드</td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td>String</td>
+          <td>유저의 이름</td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>email</td>
+          <td>String</td>
+          <td>유저의 EMAIL</td>
+          <td> X </td>
+        </tr>
+      </table>
+
+  - 응답
+  
+    <table>
+        <tr>
+          <td><b>이름</b></td>
+          <td><b>타입</b></td>
+          <td><b>설명</b></td>
+          <td><b>필수</b></td>
+        </tr>
+        <tr>
+          <td>uid</td>
+          <td>String</td>
+          <td> 유저 UUID</td>
+          <td> O </td>
+        </tr>
+      </table>
 
     
 </details>
@@ -587,59 +617,72 @@
       </tr>
       <tr>
         <td>GET</td></td>
-        <td >/api/users/{Id}</td>
+        <td >/api/users/{user_Id}</td>
       </tr>
     </table>
 
 
 - 예제
 
+  - 요청 : GET /api/schedules/{user_id}
 
+  - 응답
+    
+    HTTP/1.1 200 OK
+    
     ```json
      {
-        "id": "tyh343",
+        "user_id": "tyh343",
         "name": "kim",
         "email" : "kimsparta@sparta.co.kr"
     }
     ```
 
-- 요청 : {Id}
-  
-    <table>
-      <tr>
-        <td><b>이름</b></td>
-        <td><b>타입</b></td>
-        <td><b>설명</b></td>
-      </tr>
-      <tr>
-        <td>Id</td>
-        <td>String</td>
-        <td> 유저의 아이디 </td>
-      </tr>
-    </table>
+- 본문
 
-- 응답
-  
+  - 요청
+    
+    <table>
+        <tr>
+          <td><b>이름</b></td>
+          <td><b>타입</b></td>
+          <td><b>설명</b></td>
+          <td><b>필수</b></td>
+        </tr>
+        <tr>
+          <td>user_id</td>
+          <td>String</td>
+          <td> 유저 id </td>
+          <td> O </td>
+        </tr>
+      </table>
+
+  - 응답
+    
   <table>
       <tr>
         <td><b>이름</b></td>
         <td><b>타입</b></td>
         <td><b>설명</b></td>
+        <td><b>필수</b></td>
       </tr>
       <tr>
         <td>id</td>
         <td>String</td>
         <td>유저의 ID</td>
+        <td> O </td>
       </tr>
       <tr>
         <td>name</td>
         <td>String</td>
         <td>유저의 이름</td>
+        <td> O </td>
       </tr>
       <tr>
         <td>email</td>
         <td>String</td>
         <td>유저의 EMAIL</td>
+        <td> X </td>
       </tr>
     </table>
 
@@ -658,14 +701,15 @@
       </tr>
       <tr>
         <td>POST</td></td>
-        <td >/api/users/{id}</td>
+        <td >/api/users/{user_id}</td>
       </tr>
     </table>
 
 
 - 예제
 
-
+  - 요청
+    
     ```json
      {
         "name": "kim",
@@ -673,29 +717,57 @@
     }
     ```
 
-- 요청 : {id}
+  - 응답
+ 
+    HTTP/1.1 200 OK
+ 
+    ```json
+     {
+        "uid": "9788896a-96a4-11ef-a978-005056c00001",
+    }
+    ```
 
-    <table>
-      <tr>
-        <td><b>이름</b></td>
-        <td><b>타입</b></td>
-        <td><b>설명</b></td>
-      </tr>
-      <tr>
-        <td>name</td>
-        <td>String</td>
-        <td>유저의 이름</td>
-      </tr>
-      <tr>
-        <td>email</td>
-        <td>String</td>
-        <td>유저의 EMAIL</td>
-      </tr>
-    </table>
+- 본문
 
-- 응답
+  - 요청 : PUT /api/schedules/{user_id}
   
+      <table>
+        <tr>
+          <td><b>이름</b></td>
+          <td><b>타입</b></td>
+          <td><b>설명</b></td>
+          <td><b>필수</b></td>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td>String</td>
+          <td>유저의 이름</td>
+          <td> x </td>
+        </tr>
+        <tr>
+          <td>email</td>
+          <td>String</td>
+          <td>유저의 EMAIL</td>
+          <td> x </td>
+        </tr>
+      </table>
 
+  - 응답
+  
+      <table>
+        <tr>
+          <td><b>이름</b></td>
+          <td><b>타입</b></td>
+          <td><b>설명</b></td>
+          <td><b>필수</b></td>
+        </tr>
+        <tr>
+          <td>uid</td>
+          <td>String</td>
+          <td>유저의 UUID</td>
+          <td> O </td>
+        </tr>
+      </table>
 
     
 </details>
