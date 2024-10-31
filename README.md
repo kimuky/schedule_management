@@ -36,7 +36,7 @@
           "user_uid":"9788896a-96a4-11ef-a978-005056c00001",
           "title" : "과제",
           "content" : "꼭 해야함",
-          "color" : "일정 색상"
+          "color" : "RED"
       }
       ```
 
@@ -64,7 +64,7 @@
         <tr>
           <td>user_uid</td>
           <td>String</td>
-          <td>유저 UUID</td>
+          <td>유저 UID</td>
           <td> O </td>
         </tr>
         <tr>
@@ -286,7 +286,7 @@
         <tr>
           <td>user_uid</td>
           <td>String</td>
-          <td> 유저의 id </td>
+          <td> 유저 UID </td>
           <td> O </td>
         </tr>
         <tr>
@@ -384,7 +384,7 @@
         <tr>
           <td>user_uid</td>
           <td>String</td>
-          <td> 유저의 uid </td>
+          <td> 유저 UID </td>
           <td> O </td>
         </tr>
         <tr>
@@ -555,25 +555,25 @@
         <tr>
           <td>user_id</td>
           <td>String</td>
-          <td>유저의 ID</td>
+          <td>유저 ID</td>
           <td> O </td>
         </tr>
         <tr>
           <td>password</td>
           <td>String</td>
-          <td>유저의 패스워드</td>
+          <td>유저 PW</td>
           <td> O </td>
         </tr>
         <tr>
           <td>name</td>
           <td>String</td>
-          <td>유저의 이름</td>
+          <td>유저 이름</td>
           <td> O </td>
         </tr>
         <tr>
           <td>email</td>
           <td>String</td>
-          <td>유저의 EMAIL</td>
+          <td>유저 EMAIL</td>
           <td> X </td>
         </tr>
       </table>
@@ -590,7 +590,7 @@
         <tr>
           <td>uid</td>
           <td>String</td>
-          <td> 유저 UUID</td>
+          <td> 유저 UID</td>
           <td> O </td>
         </tr>
       </table>
@@ -662,19 +662,19 @@
         <tr>
           <td>id</td>
           <td>String</td>
-          <td>유저의 ID</td>
+          <td>유저 ID</td>
           <td> O </td>
         </tr>
         <tr>
           <td>name</td>
           <td>String</td>
-          <td>유저의 이름</td>
+          <td>유저 이름</td>
           <td> O </td>
         </tr>
         <tr>
           <td>email</td>
           <td>String</td>
-          <td>유저의 EMAIL</td>
+          <td>유저 EMAIL</td>
           <td> X </td>
         </tr>
       </table>
@@ -734,13 +734,13 @@
         <tr>
           <td>name</td>
           <td>String</td>
-          <td>유저의 이름</td>
+          <td>유저 이름</td>
           <td> x </td>
         </tr>
         <tr>
           <td>email</td>
           <td>String</td>
-          <td>유저의 EMAIL</td>
+          <td>유저 EMAIL</td>
           <td> x </td>
         </tr>
       </table>
@@ -757,7 +757,7 @@
         <tr>
           <td>uid</td>
           <td>String</td>
-          <td>유저의 UUID</td>
+          <td>유저 UID</td>
           <td> O </td>
         </tr>
       </table>
