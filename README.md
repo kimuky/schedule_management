@@ -777,7 +777,8 @@
 
 ## ERD
 
-![image](https://github.com/user-attachments/assets/2c2f5c5c-755d-40b7-a394-1a88c5c28dac)
+![image](https://github.com/user-attachments/assets/8cdeaef2-1212-4b9d-926e-b97402cec4d8)
+
 
 
 ---
