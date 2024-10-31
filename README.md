@@ -659,32 +659,32 @@
 
   - 응답
     
-  <table>
-      <tr>
-        <td><b>이름</b></td>
-        <td><b>타입</b></td>
-        <td><b>설명</b></td>
-        <td><b>필수</b></td>
-      </tr>
-      <tr>
-        <td>id</td>
-        <td>String</td>
-        <td>유저의 ID</td>
-        <td> O </td>
-      </tr>
-      <tr>
-        <td>name</td>
-        <td>String</td>
-        <td>유저의 이름</td>
-        <td> O </td>
-      </tr>
-      <tr>
-        <td>email</td>
-        <td>String</td>
-        <td>유저의 EMAIL</td>
-        <td> X </td>
-      </tr>
-    </table>
+    <table>
+        <tr>
+          <td><b>이름</b></td>
+          <td><b>타입</b></td>
+          <td><b>설명</b></td>
+          <td><b>필수</b></td>
+        </tr>
+        <tr>
+          <td>id</td>
+          <td>String</td>
+          <td>유저의 ID</td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td>String</td>
+          <td>유저의 이름</td>
+          <td> O </td>
+        </tr>
+        <tr>
+          <td>email</td>
+          <td>String</td>
+          <td>유저의 EMAIL</td>
+          <td> X </td>
+        </tr>
+      </table>
 
     
 </details>
