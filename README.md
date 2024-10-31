@@ -498,7 +498,7 @@
 |기능|Method|URL|Request|Response|상태코드|
 |---|---|---|---|---|---|
 |유저 등록|`POST`|/api/users|요청 body|등록 정보|200: 정상 등록, 400: 비정상 값|
-|유저 정보 조회|`GET`|/api/users/{user_Id}| X |단건 응답 정보|200: 정상 조회, 404: 일정이 사라짐|
+|유저 정보 조회|`GET`|/api/users/{user_id}| X |단건 응답 정보|200: 정상 조회, 404: 일정이 사라짐|
 |유저 수정|`PUT`|/api/users/{user_id}|요청 body|수정 정보|200: 정상등록, 400: 비정상 값, 404: 일정이 사라짐|
 
 <details>
@@ -700,7 +700,7 @@
         <td ><b>요청 URL</b></td>
       </tr>
       <tr>
-        <td>POST</td></td>
+        <td>PUT</td></td>
         <td >/api/users/{user_id}</td>
       </tr>
     </table>
