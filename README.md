@@ -6,9 +6,9 @@
 |----|---|---|---|---|---|
 |일정 생성|`POST`|/api/schedules|요청 body|등록 정보|200: 정상 등록, 400: 비정상 값|
 |전체 일정 조회|`GET`|/api/schedules| X |다건 응답 정보|200: 정상 조회|
-|선택 일정 조회|`GET`|/api/schedules/{schedule_id}| X |단건 응답 정보|200: 정상 조회, 404: 일정이 사라짐|
-|선택 일정 수정|`PUT`|/api/schedules/{schedule_id}|요청 body|수정 정보|200: 정상등록, 400: 비정상 값, 404: 일정이 사라짐|
-|선택 일정 삭제|`DELETE`|/api/schedules/{schedule_id}| X | 삭제 정보 |204: 정상 등록, 404: 일정이 사라짐|
+|선택 일정 조회|`GET`|/api/schedules/{schedule_id}| 요청 param |단건 응답 정보|200: 정상 조회, 404: 일정이 사라짐|
+|선택 일정 수정|`PUT`|/api/schedules/{schedule_id}|요청 param, 요청 body|수정 정보|200: 정상등록, 400: 비정상 값, 404: 일정이 사라짐|
+|선택 일정 삭제|`DELETE`|/api/schedules/{schedule_id}| 요청 param | 삭제 정보 |204: 정상 등록, 404: 일정이 사라짐|
 
 <details>
   <summary><b>일정 생성</b></summary>
@@ -498,8 +498,8 @@
 |기능|Method|URL|Request|Response|상태코드|
 |---|---|---|---|---|---|
 |유저 등록|`POST`|/api/users|요청 body|등록 정보|200: 정상 등록, 400: 비정상 값|
-|유저 정보 조회|`GET`|/api/users/{user_id}| X |단건 응답 정보|200: 정상 조회, 404: 일정이 사라짐|
-|유저 수정|`PUT`|/api/users/{user_id}|요청 body|수정 정보|200: 정상등록, 400: 비정상 값, 404: 일정이 사라짐|
+|유저 정보 조회|`GET`|/api/users/{user_id}| 요청 param |단건 응답 정보|200: 정상 조회, 404: 일정이 사라짐|
+|유저 수정|`PUT`|/api/users/{user_id}|요청 param, 요청 body|수정 정보|200: 정상등록, 400: 비정상 값, 404: 일정이 사라짐|
 
 <details>
   <summary><b>유저 등록</b></summary>
