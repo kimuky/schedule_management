@@ -787,8 +787,8 @@ CREATE TABLE users (
     id varchar(45) NOT NULL,
     name varchar(20) NOT NULL,
     email varchar(45),
-    create_date TIMESTAMP NOT NULL,
-    update_date TIMESTAMP
+    create_date DATE NOT NULL,
+    update_date DATE
 );
 
 -- Create schedules table
@@ -798,8 +798,8 @@ CREATE TABLE schedules (
     title varchar(20) NOT NULL,
     content varchar(100),
     color varchar(20),
-    create_date TIMESTAMP NOT NULL,
-    update_date TIMESTAMP,
+    create_date DATE NOT NULL,
+    update_date DATE,
     FOREIGN KEY (user_id) REFERENCES users (id)
 )
 
