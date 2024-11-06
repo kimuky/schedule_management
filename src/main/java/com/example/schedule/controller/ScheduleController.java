@@ -6,6 +6,7 @@ import com.example.schedule.dto.users.UserRequestDto;
 import com.example.schedule.dto.users.UserResponseDto;
 import com.example.schedule.service.schedule.ScheduleService;
 import com.example.schedule.service.user.UserService;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,16 @@ public class ScheduleController {
     @PostMapping
     public ResponseEntity<ScheduleResponseDto> createSchedule (@RequestBody ScheduleRequestDto dto) {
         return new ResponseEntity<>(scheduleService.createSchedule(dto), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public List<ScheduleResponseDto> findAllSchedules () {
+        return scheduleService.findAllSchedules();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ScheduleResponseDto> findScheduleById(@PathVariable int id) {
+        return new ResponseEntity<>(scheduleService.findScheduleByIdOrElseThrow(id), HttpStatus.OK);
     }
 
 }

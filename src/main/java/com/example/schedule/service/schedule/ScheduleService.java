@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface ScheduleService {
     ScheduleResponseDto createSchedule(ScheduleRequestDto dto);
+
+    List<ScheduleResponseDto> findAllSchedules();
+
+    ScheduleResponseDto findScheduleByIdOrElseThrow(int id);
 }
