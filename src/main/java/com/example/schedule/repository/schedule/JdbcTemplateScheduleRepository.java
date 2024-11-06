@@ -49,6 +49,11 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
         return result.stream().findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디가 없음"));
     }
 
+    @Override
+    public int updateSchedule(int id, String title, String content, String color) {
+        return jdbcTemplate.update("update schedule set title = ?, content = ?, color = ?, update_date = CURRENT_DATE() where id = ?", title, content, color, id);
+    }
+
     //TODO 전체 다 반환? 고민해볼것
     private RowMapper<ScheduleResponseDto> scheduleRowMapper () {
         return new RowMapper<ScheduleResponseDto>() {

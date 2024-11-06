@@ -10,5 +10,7 @@ public interface ScheduleService {
 
     List<ScheduleResponseDto> findAllSchedules();
 
-    ScheduleResponseDto findScheduleByIdOrElseThrow(int id);
+    ScheduleResponseDto findScheduleById(int id);
+
+    ScheduleResponseDto updateSchedule(int id,String user_uid, String title, String content, String color);
 }
