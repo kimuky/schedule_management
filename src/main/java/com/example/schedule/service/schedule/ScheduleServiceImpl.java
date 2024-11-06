@@ -51,12 +51,12 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Transactional
     @Override
-    public ScheduleResponseDto updateSchedule(int id,String user_uid, String title, String content, String color) {
+    public ScheduleResponseDto updateSchedule(int id,String userUid, String title, String content, String color) {
 
         Schedule beforeSchedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
 
         // 패스워드 대신 uid 로 구분
-        if (!beforeSchedule.getUser_uid().equals(user_uid)) {
+        if (!beforeSchedule.getUser_uid().equals(userUid)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "해당 게시글 주인이 아님");
         }
 
@@ -76,4 +76,23 @@ public class ScheduleServiceImpl implements ScheduleService {
         return new ScheduleResponseDto(afterSchedule);
     }
 
+    @Transactional
+    @Override
+    public ScheduleResponseDto updateSchedulePart(int id, ScheduleRequestDto dto) {
+        Schedule beforeSchedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
+
+        // 패스워드 대신 uid 로 구분
+        if (!beforeSchedule.getUser_uid().equals(dto.getUser_uid())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "해당 게시글 주인이 아님");
+        }
+
+        int updatedRow = scheduleRepository.updateScheduleTitle(id, dto);
+
+        if (updatedRow == 0) {
+            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디가 없습니다");
+        }
+        Schedule afterSchedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
+
+        return new ScheduleResponseDto(afterSchedule);
+    }
 }

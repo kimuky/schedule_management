@@ -13,4 +13,6 @@ public interface ScheduleService {
     ScheduleResponseDto findScheduleById(int id);
 
     ScheduleResponseDto updateSchedule(int id,String user_uid, String title, String content, String color);
+
+    ScheduleResponseDto updateSchedulePart(int id, ScheduleRequestDto dto);
 }

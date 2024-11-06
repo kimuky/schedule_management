@@ -15,4 +15,7 @@ public interface ScheduleRepository {
     Schedule findScheduleByIdOrElseThrow(int id);
 
     int updateSchedule(int id, String title, String content, String color);
+
+    int updateScheduleTitle(int id, ScheduleRequestDto dto);
+
 }

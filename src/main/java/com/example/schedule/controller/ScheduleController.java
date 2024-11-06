@@ -2,11 +2,7 @@ package com.example.schedule.controller;
 
 import com.example.schedule.dto.schedule.ScheduleRequestDto;
 import com.example.schedule.dto.schedule.ScheduleResponseDto;
-import com.example.schedule.dto.users.UserRequestDto;
-import com.example.schedule.dto.users.UserResponseDto;
-import com.example.schedule.service.schedule.ScheduleService;
-import com.example.schedule.service.user.UserService;
-import lombok.Getter;
+import com.example.schedule.service.schedule.ScheduleService;;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +38,11 @@ public class ScheduleController {
     @PutMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> updateSchedule(@PathVariable int id, @RequestBody ScheduleRequestDto dto) {
         return new ResponseEntity<>(scheduleService.updateSchedule(id, dto.getUser_uid(), dto.getTitle(), dto.getContent(), dto.getColor()), HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<ScheduleResponseDto> updateScheduleTitle(@PathVariable int id, @RequestBody ScheduleRequestDto dto) {
+        return new ResponseEntity<>(scheduleService.updateSchedulePart(id, dto), HttpStatus.OK);
     }
 
 }
