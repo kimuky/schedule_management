@@ -21,7 +21,7 @@ public class JdbcTemplateUserRepository implements UserRepository {
     public int registerUser(User user) {
 
         String query = "INSERT INTO user (uid, id, password, name, email, create_date, update_date) " +
-                "VALUES (UUID(),?,?,?,?,DATE_FORMAT(CURRENT_TIMESTAMP(), '%Y-%m-%d'),DATE_FORMAT(CURRENT_TIMESTAMP(), '%Y-%m-%d'))";
+                "VALUES (UUID(),?,?,?,?,CURRENT_DATE(),CURRENT_DATE())";
 
         return jdbcTemplate.update(query, user.getId(), user.getPassword(), user.getName(), user.getEmail());
     }
