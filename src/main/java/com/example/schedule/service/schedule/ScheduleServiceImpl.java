@@ -2,10 +2,14 @@ package com.example.schedule.service.schedule;
 
 import com.example.schedule.dto.schedule.ScheduleRequestDto;
 import com.example.schedule.dto.schedule.ScheduleResponseDto;
+import com.example.schedule.entity.Schedule;
 import com.example.schedule.repository.schedule.ScheduleRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
@@ -32,5 +36,16 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
 
         return new ScheduleResponseDto(dto.getUser_uid());
+    }
+
+    @Override
+    public List<ScheduleResponseDto> findAllSchedules() {
+        return scheduleRepository.findAllSchedules();
+    }
+
+    @Override
+    public ScheduleResponseDto findScheduleByIdOrElseThrow(int id) {
+        Schedule schedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
+        return new ScheduleResponseDto(schedule);
     }
 }
