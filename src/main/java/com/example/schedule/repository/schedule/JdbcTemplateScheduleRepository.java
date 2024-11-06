@@ -28,10 +28,10 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
     @Override
     public int createSchedule(ScheduleRequestDto dto) {
 
-        String query = "INSERT INTO schedule (user_uid, title, content, color, create_date, update_date) " +
-                "VALUES (?,?,?,?,CURRENT_DATE(),CURRENT_DATE())";
+        String query = "INSERT INTO schedule (user_uid,name, title, content, color, create_date, update_date) " +
+                "VALUES (?,?,?,?,?,CURRENT_DATE(),CURRENT_DATE())";
 
-        return jdbcTemplate.update(query, dto.getUser_uid(), dto.getTitle(), dto.getContent(), dto.getColor());
+        return jdbcTemplate.update(query, dto.getUser_uid(),dto.getUser_name(), dto.getTitle(), dto.getContent(), dto.getColor());
     }
 
     @Override
