@@ -110,4 +110,17 @@ public class ScheduleServiceImpl implements ScheduleService {
             throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "스케쥴이 없습니다");
         }
     }
+
+    @Override
+    public List<ScheduleResponseDto> pagination(int pageNum, int pageSize) {
+
+        int scheduleSize =  findAllSchedules().size();
+
+//        if (pageNum > Math.ceil(scheduleSize/(double)pageSize)) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+//        }
+
+
+        return scheduleRepository.findFirstPageSchedules(pageNum,pageSize);
+    }
 }

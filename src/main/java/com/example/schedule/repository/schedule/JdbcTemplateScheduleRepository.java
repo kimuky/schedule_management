@@ -29,7 +29,7 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
     public int createSchedule(ScheduleRequestDto dto) {
 
         String query = "INSERT INTO schedule (user_uid,name, title, content, color, create_date, update_date) " +
-                "VALUES (?,?,?,?,?,CURRENT_DATE(),CURRENT_DATE())";
+                "VALUES (?,?,?,?,?,CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())";
 
         return jdbcTemplate.update(query, dto.getUser_uid(),dto.getUser_name(), dto.getTitle(), dto.getContent(), dto.getColor());
     }
@@ -81,6 +81,13 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
     public int deleteScheduleTitle(int id) {
         return jdbcTemplate.update("DELETE FROM schedule WHERE id = ?", id);
     }
+
+    @Override
+    public List<ScheduleResponseDto> findFirstPageSchedules(int pageNum, int pageSize) {
+        return jdbcTemplate.query("SELECT * FROM schedule ORDER BY update_date DESC, id LIMIT ?,?", scheduleRowMapper(),(pageNum-1)*pageSize, pageSize);
+
+    }
+
 
     //TODO 전체 다 반환? 고민해볼것
     private RowMapper<ScheduleResponseDto> scheduleRowMapper () {
