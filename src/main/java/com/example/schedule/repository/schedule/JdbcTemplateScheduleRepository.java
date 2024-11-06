@@ -36,25 +36,25 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
 
     @Override
     public List<ScheduleResponseDto> findAllSchedules() {
-        return jdbcTemplate.query("SELECT * FROM schedule order by update_date desc, id", scheduleRowMapper());
+        return jdbcTemplate.query("SELECT * FROM schedule ORDER BY update_date DESC, id", scheduleRowMapper());
     }
 
     @Override
     public Schedule findScheduleByIdOrElseThrow(int id) {
-        List<Schedule> result = jdbcTemplate.query("SELECT * FROM schedule where id = ?", scheduleRowMapperV2(), id);
+        List<Schedule> result = jdbcTemplate.query("SELECT * FROM schedule WHERE id = ?", scheduleRowMapperV2(), id);
 
         return result.stream().findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디가 없음"));
     }
 
     @Override
     public int updateSchedule(int id, String title, String content, String color) {
-        return jdbcTemplate.update("update schedule set title = ?, content = ?, color = ?, update_date = CURRENT_DATE() where id = ?", title, content, color, id);
+        return jdbcTemplate.update("UPDATE schedule SET title = ?, content = ?, color = ?, update_date = CURRENT_DATE() WHERE id = ?", title, content, color, id);
     }
 
     @Override
     public int updateScheduleTitle(int id, ScheduleRequestDto dto) {
         // 이렇게 말고 다른 방법은 아예 모르겠습니다....
-        StringBuilder query = new StringBuilder("UPDATE schedule set update_date = CURRENT_DATE()");
+        StringBuilder query = new StringBuilder("UPDATE schedule SET update_date = CURRENT_DATE()");
         List<Object> params = new ArrayList<>();
 
         if (dto.getTitle() != null) {
@@ -75,6 +75,11 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
 
 
         return jdbcTemplate.update(query.toString(), params.toArray());
+    }
+
+    @Override
+    public int deleteScheduleTitle(int id) {
+        return jdbcTemplate.update("DELETE FROM schedule WHERE id = ?", id);
     }
 
     //TODO 전체 다 반환? 고민해볼것

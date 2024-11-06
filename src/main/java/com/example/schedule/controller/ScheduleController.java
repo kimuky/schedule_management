@@ -2,7 +2,7 @@ package com.example.schedule.controller;
 
 import com.example.schedule.dto.schedule.ScheduleRequestDto;
 import com.example.schedule.dto.schedule.ScheduleResponseDto;
-import com.example.schedule.service.schedule.ScheduleService;;
+import com.example.schedule.service.schedule.ScheduleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +43,12 @@ public class ScheduleController {
     @PatchMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> updateScheduleTitle(@PathVariable int id, @RequestBody ScheduleRequestDto dto) {
         return new ResponseEntity<>(scheduleService.updateSchedulePart(id, dto), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSchedule(@PathVariable int id, @RequestBody ScheduleRequestDto dto) {
+        scheduleService.deleteSchedule(id,dto.getUser_uid());
+        return new ResponseEntity<>( HttpStatus.OK);
     }
 
 }

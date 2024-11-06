@@ -68,7 +68,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         int updatedRow = scheduleRepository.updateSchedule(id, title, content, color);
 
         if (updatedRow == 0) {
-            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디가 없습니다");
+            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "스케쥴이 없습니다");
         }
 
         Schedule afterSchedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
@@ -89,10 +89,25 @@ public class ScheduleServiceImpl implements ScheduleService {
         int updatedRow = scheduleRepository.updateScheduleTitle(id, dto);
 
         if (updatedRow == 0) {
-            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디가 없습니다");
+            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "스케쥴이 없습니다");
         }
         Schedule afterSchedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
 
         return new ScheduleResponseDto(afterSchedule);
+    }
+
+    @Override
+    public void deleteSchedule(int id, String userUid) {
+        Schedule beforeSchedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
+
+        if (!beforeSchedule.getUser_uid().equals(userUid)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "해당 게시글 주인이 아님");
+        }
+
+        int updatedRow = scheduleRepository.deleteScheduleTitle(id);
+
+        if (updatedRow == 0) {
+            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "스케쥴이 없습니다");
+        }
     }
 }
