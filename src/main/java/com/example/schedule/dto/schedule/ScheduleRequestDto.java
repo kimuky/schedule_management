@@ -7,5 +7,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class ScheduleRequestDto {
-
+    private String user_uid;
+    private String title;
+    private String content;
+    private String color;
 }
