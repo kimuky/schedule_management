@@ -17,4 +17,6 @@ public interface ScheduleService {
     ScheduleResponseDto updateSchedulePart(int id, ScheduleRequestDto dto);
 
     void deleteSchedule(int id, String userUid);
+
+    List<ScheduleResponseDto> pagination(int pageNum, int pageSize);
 }
