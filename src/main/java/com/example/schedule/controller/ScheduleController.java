@@ -28,8 +28,8 @@ public class ScheduleController {
         return new ResponseEntity<>(scheduleService.createSchedule(dto), HttpStatus.OK);
     }
 
-    @GetMapping("/pageNum/{pageNum}/pageSize/{pageSize}")
-    public List<ScheduleResponseDto> pagination(@PathVariable int pageNum, @PathVariable int pageSize) {
+    @GetMapping("/param")
+    public List<ScheduleResponseDto> pagination(@RequestParam int pageNum, @RequestParam int pageSize) {
         return scheduleService.pagination(pageNum, pageSize);
     }
 
