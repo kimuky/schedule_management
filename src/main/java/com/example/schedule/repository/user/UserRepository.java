@@ -1,9 +1,7 @@
 package com.example.schedule.repository.user;
 
-import com.example.schedule.dto.users.UserResponseDto;
-import com.example.schedule.entity.User;
-
+import com.example.schedule.dto.user.UserRequestDto;
 
 public interface UserRepository {
-    int registerUser(User user);
+    int registerUser(UserRequestDto dto);
 }

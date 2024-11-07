@@ -1,9 +1,7 @@
 package com.example.schedule.repository.user;
 
-import com.example.schedule.dto.users.UserResponseDto;
-import com.example.schedule.entity.User;
+import com.example.schedule.dto.user.UserRequestDto;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -18,11 +16,11 @@ public class JdbcTemplateUserRepository implements UserRepository {
     }
 
     @Override
-    public int registerUser(User user) {
+    public int registerUser(UserRequestDto dto) {
 
         String query = "INSERT INTO user (uid, id, password, name, email, create_date, update_date) " +
                 "VALUES (UUID(),?,?,?,?,CURRENT_DATE(),CURRENT_DATE())";
 
-        return jdbcTemplate.update(query, user.getId(), user.getPassword(), user.getName(), user.getEmail());
+        return jdbcTemplate.update(query, dto.getId(), dto.getPassword(), dto.getName(), dto.getEmail());
     }
 }

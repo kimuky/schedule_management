@@ -1,11 +1,8 @@
 package com.example.schedule.entity;
 
-import com.example.schedule.dto.users.UserRequestDto;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public class User {
 
     private String uid;
@@ -13,11 +10,4 @@ public class User {
     private String password;
     private String name;
     private String email;
-
-    public User(UserRequestDto dto) {
-        this.id = dto.getId();
-        this.password = dto.getPassword();
-        this.name = dto.getName();
-        this.email = dto.getEmail();
-    }
 }

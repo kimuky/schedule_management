@@ -12,7 +12,7 @@ public interface ScheduleRepository {
 
     List<ScheduleResponseDto> findAllSchedules();
 
-    Schedule findScheduleByIdOrElseThrow(int id);
+    Optional<Schedule> findScheduleById(int id);
 
     int updateSchedule(int id, String title, String content, String color);
 
@@ -20,5 +20,5 @@ public interface ScheduleRepository {
 
     int deleteScheduleTitle(int id);
 
-    List<ScheduleResponseDto> findFirstPageSchedules(int pageNum, int pageSize);
+    List<ScheduleResponseDto> findPageSchedules(int pageNum, int pageSize);
 }

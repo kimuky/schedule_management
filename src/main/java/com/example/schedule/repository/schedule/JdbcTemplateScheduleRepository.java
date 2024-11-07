@@ -3,20 +3,19 @@ package com.example.schedule.repository.schedule;
 import com.example.schedule.dto.schedule.ScheduleRequestDto;
 import com.example.schedule.dto.schedule.ScheduleResponseDto;
 import com.example.schedule.entity.Schedule;
-import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public class JdbcTemplateScheduleRepository implements ScheduleRepository{
+public class JdbcTemplateScheduleRepository implements ScheduleRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -28,10 +27,10 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
     @Override
     public int createSchedule(ScheduleRequestDto dto) {
 
-        String query = "INSERT INTO schedule (user_uid,name, title, content, color, create_date, update_date) " +
+        String query = "INSERT INTO schedule (user_uid, user_name, title, content, color, create_date, update_date) " +
                 "VALUES (?,?,?,?,?,CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())";
 
-        return jdbcTemplate.update(query, dto.getUser_uid(),dto.getUser_name(), dto.getTitle(), dto.getContent(), dto.getColor());
+        return jdbcTemplate.update(query, dto.getUser_uid(), dto.getUser_name(), dto.getTitle(), dto.getContent(), dto.getColor());
     }
 
     @Override
@@ -40,10 +39,9 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
     }
 
     @Override
-    public Schedule findScheduleByIdOrElseThrow(int id) {
+    public Optional<Schedule> findScheduleById(int id) {
         List<Schedule> result = jdbcTemplate.query("SELECT * FROM schedule WHERE id = ?", scheduleRowMapperV2(), id);
-
-        return result.stream().findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디가 없음"));
+        return result.stream().findAny();
     }
 
     @Override
@@ -53,7 +51,8 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
 
     @Override
     public int updateScheduleTitle(int id, ScheduleRequestDto dto) {
-        // 이렇게 말고 다른 방법은 아예 모르겠습니다....
+
+        // 사용자가 제목, 내용 바꿀 수도 있고, 색깔만 바꿀 수도 있을 것이라 생각해 이렇게 구현했습니다.
         StringBuilder query = new StringBuilder("UPDATE schedule SET update_date = CURRENT_DATE()");
         List<Object> params = new ArrayList<>();
 
@@ -73,7 +72,6 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
         query.append(" WHERE id = ?");
         params.add(id);
 
-
         return jdbcTemplate.update(query.toString(), params.toArray());
     }
 
@@ -83,19 +81,17 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
     }
 
     @Override
-    public List<ScheduleResponseDto> findFirstPageSchedules(int pageNum, int pageSize) {
-        return jdbcTemplate.query("SELECT * FROM schedule ORDER BY update_date DESC, id LIMIT ?,?", scheduleRowMapper(),(pageNum-1)*pageSize, pageSize);
+    public List<ScheduleResponseDto> findPageSchedules(int pageNum, int pageSize) {
+        return jdbcTemplate.query("SELECT * FROM schedule ORDER BY update_date DESC, id LIMIT ?,?", scheduleRowMapper(), (pageNum - 1) * pageSize, pageSize);
 
     }
 
-
-    //TODO 전체 다 반환? 고민해볼것
-    private RowMapper<ScheduleResponseDto> scheduleRowMapper () {
+    private RowMapper<ScheduleResponseDto> scheduleRowMapper() {
         return new RowMapper<ScheduleResponseDto>() {
             @Override
             public ScheduleResponseDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-                return  new ScheduleResponseDto(
+                return new ScheduleResponseDto(
                         rs.getString("user_uid"),
                         rs.getInt("id"),
                         rs.getString("title"),
@@ -108,7 +104,7 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
         };
     }
 
-    private RowMapper<Schedule> scheduleRowMapperV2 () {
+    private RowMapper<Schedule> scheduleRowMapperV2() {
         return new RowMapper<Schedule>() {
             @Override
             public Schedule mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -123,6 +119,5 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
                 );
             }
         };
-
     }
 }
