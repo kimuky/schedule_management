@@ -25,11 +25,9 @@ public class UserServiceImpl implements UserService {
         int updatedRow = userRepository.registerUser(user);
 
         if (updatedRow == 0) {
-            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디가 없습니다");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디가 없습니다");
         }
 
-        //TODO uid 는 어떻게 반환?
-        // 여기서 findById로 찾기?
-        return new UserResponseDto(user.getId()) ;
+        return new UserResponseDto(user.getId());
     }
 }

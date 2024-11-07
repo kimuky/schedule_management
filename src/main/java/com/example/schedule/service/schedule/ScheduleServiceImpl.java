@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
@@ -24,11 +23,6 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public ScheduleResponseDto createSchedule(ScheduleRequestDto dto) {
-
-        // NOT NULL 에 대한 확인
-//        if (dto.getUser_uid() == null || dto.getTitle() == null) {
-//            throw new BadRequestException();
-//        }
 
         int scheduledRow = scheduleRepository.createSchedule(dto);
 
@@ -57,12 +51,12 @@ public class ScheduleServiceImpl implements ScheduleService {
         Schedule beforeSchedule = scheduleRepository.findScheduleById(id)
                 .orElseThrow(NotFoundException::new);
 
-        // 들고온 스케쥴의 uid 와 요청한 uid 비교
-        if (!beforeSchedule.getUser_uid().equals(userUid)){
+        // 패스워드 대신 uid 로 비교
+        if (!beforeSchedule.getUser_uid().equals(userUid)) {
             throw new ForbiddenException();
         }
 
-//         할일 작성자 말고 제목 내용 색깔
+        // 할일 작성자 대신 제목 내용 색깔
         if (title == null || color == null || content == null) {
             throw new BadRequestException();
         }

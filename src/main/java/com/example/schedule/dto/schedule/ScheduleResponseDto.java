@@ -3,7 +3,6 @@ package com.example.schedule.dto.schedule;
 import com.example.schedule.entity.Schedule;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @AllArgsConstructor

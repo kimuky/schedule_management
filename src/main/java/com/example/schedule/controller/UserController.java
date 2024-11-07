@@ -21,6 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    // 유저 생성
     @PostMapping
     public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody UserRequestDto dto) {
 

@@ -5,6 +5,5 @@ import com.example.schedule.dto.user.UserResponseDto;
 
 public interface UserService {
 
-
     UserResponseDto registerUser(UserRequestDto dto);
 }

@@ -16,6 +16,6 @@ public class UserRequestDto {
     @NotBlank(message = "이름은 꼭 입력해주세요")
     private String name;
 
-    @Email (message = "이메일을 제대로 입력해주세요")
+    @Email(message = "이메일을 제대로 입력해주세요")
     private String email;
 }
