@@ -9,11 +9,13 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.management.openmbean.OpenDataException;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class JdbcTemplateScheduleRepository implements ScheduleRepository{
@@ -28,7 +30,7 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
     @Override
     public int createSchedule(ScheduleRequestDto dto) {
 
-        String query = "INSERT INTO schedule (user_uid,name, title, content, color, create_date, update_date) " +
+        String query = "INSERT INTO schedule (user_uid, user_name, title, content, color, create_date, update_date) " +
                 "VALUES (?,?,?,?,?,CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())";
 
         return jdbcTemplate.update(query, dto.getUser_uid(),dto.getUser_name(), dto.getTitle(), dto.getContent(), dto.getColor());
@@ -40,10 +42,10 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
     }
 
     @Override
-    public Schedule findScheduleByIdOrElseThrow(int id) {
+    public Optional<Schedule> findScheduleById(int id) {
         List<Schedule> result = jdbcTemplate.query("SELECT * FROM schedule WHERE id = ?", scheduleRowMapperV2(), id);
-
-        return result.stream().findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디가 없음"));
+        return  result.stream().findAny();
+//        return result.stream().findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디 없 음"));
     }
 
     @Override

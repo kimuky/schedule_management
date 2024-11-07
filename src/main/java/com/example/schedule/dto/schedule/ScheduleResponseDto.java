@@ -17,10 +17,6 @@ public class ScheduleResponseDto {
     private String create_date;
     private String update_date;
 
-    public ScheduleResponseDto(String user_uid){
-        this.user_uid = user_uid;
-    }
-
     public ScheduleResponseDto(Schedule schedule) {
         this.user_uid = schedule.getUser_uid();
         this.id = schedule.getId();
@@ -29,5 +25,12 @@ public class ScheduleResponseDto {
         this.color = schedule.getColor();
         this.create_date = schedule.getCreate_date();
         this.update_date = schedule.getUpdate_date();
+    }
+
+    public ScheduleResponseDto(ScheduleRequestDto dto) {
+        this.user_uid = dto.getUser_uid();
+        this.title = dto.getTitle();
+        this.content = dto.getContent();
+        this.color = dto.getColor();
     }
 }

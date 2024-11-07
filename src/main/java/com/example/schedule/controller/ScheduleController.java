@@ -6,6 +6,7 @@ import com.example.schedule.exception.BadRequestException;
 import com.example.schedule.exception.ForbiddenException;
 import com.example.schedule.exception.NotFoundException;
 import com.example.schedule.service.schedule.ScheduleService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class ScheduleController {
     }
 
     @PostMapping
-    public ResponseEntity<ScheduleResponseDto> createSchedule(@RequestBody ScheduleRequestDto dto) {
+    public ResponseEntity<ScheduleResponseDto> createSchedule(@Valid @RequestBody ScheduleRequestDto dto) {
         return new ResponseEntity<>(scheduleService.createSchedule(dto), HttpStatus.OK);
     }
 
@@ -44,7 +45,7 @@ public class ScheduleController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ScheduleResponseDto> updateSchedule(@PathVariable int id, @RequestBody ScheduleRequestDto dto) {
+    public ResponseEntity<ScheduleResponseDto> updateSchedule(@PathVariable int id, @Valid @RequestBody ScheduleRequestDto dto) {
         return new ResponseEntity<>(scheduleService.updateSchedule(id, dto.getUser_uid(), dto.getTitle(), dto.getContent(), dto.getColor()), HttpStatus.OK);
     }
 
@@ -59,20 +60,20 @@ public class ScheduleController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<String> handleCustomException(BadRequestException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-    }
-
-    @ExceptionHandler(ForbiddenException.class)
-    public ResponseEntity<String> handleCustomException(ForbiddenException e) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
-    }
-
-    @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<String> handleCustomException(NotFoundException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-    }
+//    @ExceptionHandler(BadRequestException.class)
+//    public ResponseEntity<String> handleCustomException(BadRequestException e) {
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+//    }
+//
+//    @ExceptionHandler(ForbiddenException.class)
+//    public ResponseEntity<String> handleCustomException(ForbiddenException e) {
+//        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+//    }
+//
+//    @ExceptionHandler(NotFoundException.class)
+//    public ResponseEntity<String> handleCustomException(NotFoundException e) {
+//        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+//    }
 
 
 }

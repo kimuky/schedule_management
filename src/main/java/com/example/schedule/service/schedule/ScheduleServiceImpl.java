@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
@@ -25,9 +26,9 @@ public class ScheduleServiceImpl implements ScheduleService {
     public ScheduleResponseDto createSchedule(ScheduleRequestDto dto) {
 
         // NOT NULL 에 대한 확인
-        if (dto.getUser_uid() == null || dto.getTitle() == null) {
-            throw new BadRequestException();
-        }
+//        if (dto.getUser_uid() == null || dto.getTitle() == null) {
+//            throw new BadRequestException();
+//        }
 
         int scheduledRow = scheduleRepository.createSchedule(dto);
 
@@ -35,7 +36,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             throw new NotFoundException();
         }
 
-        return new ScheduleResponseDto(dto.getUser_uid());
+        return new ScheduleResponseDto(dto);
     }
 
     @Override
@@ -45,7 +46,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public ScheduleResponseDto findScheduleById(int id) {
-        Schedule schedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
+        Schedule schedule = scheduleRepository.findScheduleById(id).orElseThrow(NotFoundException::new);
         return new ScheduleResponseDto(schedule);
     }
 
@@ -53,15 +54,15 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public ScheduleResponseDto updateSchedule(int id, String userUid, String title, String content, String color) {
 
-        Schedule beforeSchedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
+        Schedule beforeSchedule = scheduleRepository.findScheduleById(id)
+                .orElseThrow(NotFoundException::new);
 
-        // 패스워드 대신 uid 로 구분
-        if (!beforeSchedule.getUser_uid().equals(userUid)) {
+        // 들고온 스케쥴의 uid 와 요청한 uid 비교
+        if (!beforeSchedule.getUser_uid().equals(userUid)){
             throw new ForbiddenException();
         }
 
-        // 할일 작성자 말고 제목 내용 색깔
-        //TODO
+//         할일 작성자 말고 제목 내용 색깔
         if (title == null || color == null || content == null) {
             throw new BadRequestException();
         }
@@ -72,15 +73,15 @@ public class ScheduleServiceImpl implements ScheduleService {
             throw new NotFoundException();
         }
 
-        Schedule afterSchedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
-
+        Schedule afterSchedule = scheduleRepository.findScheduleById(id).orElseThrow(NotFoundException::new);
         return new ScheduleResponseDto(afterSchedule);
     }
 
     @Transactional
     @Override
     public ScheduleResponseDto updateSchedulePart(int id, ScheduleRequestDto dto) {
-        Schedule beforeSchedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
+        Schedule beforeSchedule = scheduleRepository.findScheduleById(id)
+                .orElseThrow(NotFoundException::new);
 
         // 패스워드 대신 uid 로 구분
         if (!beforeSchedule.getUser_uid().equals(dto.getUser_uid())) {
@@ -92,14 +93,16 @@ public class ScheduleServiceImpl implements ScheduleService {
         if (updatedRow == 0) {
             throw new NotFoundException();
         }
-        Schedule afterSchedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
+        Schedule afterSchedule = scheduleRepository.findScheduleById(id)
+                .orElseThrow(NotFoundException::new);
 
         return new ScheduleResponseDto(afterSchedule);
     }
 
     @Override
     public void deleteSchedule(int id, String userUid) {
-        Schedule beforeSchedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
+        Schedule beforeSchedule = scheduleRepository.findScheduleById(id)
+                .orElseThrow(NotFoundException::new);
 
         if (!beforeSchedule.getUser_uid().equals(userUid)) {
             throw new ForbiddenException();
