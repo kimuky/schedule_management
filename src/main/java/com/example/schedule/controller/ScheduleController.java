@@ -69,7 +69,7 @@ public class ScheduleController {
      *
      * @param id  해당 스케쥴의 아이디
      * @param dto 제목 내용 수정
-     * @return
+     * @return 스케쥴 반환
      */
     @PatchMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> updateScheduleTitle(@PathVariable int id, @RequestBody ScheduleRequestDto dto) {

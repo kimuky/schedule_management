@@ -1,7 +1,6 @@
 package com.example.schedule.repository.user;
 
 import com.example.schedule.dto.user.UserRequestDto;
-import com.example.schedule.entity.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
