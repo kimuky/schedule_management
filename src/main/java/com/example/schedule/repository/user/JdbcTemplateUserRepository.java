@@ -1,9 +1,7 @@
 package com.example.schedule.repository.user;
 
-import com.example.schedule.dto.users.UserResponseDto;
 import com.example.schedule.entity.User;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;

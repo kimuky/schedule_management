@@ -1,6 +1,5 @@
-package com.example.schedule.dto.users;
+package com.example.schedule.dto.user;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
