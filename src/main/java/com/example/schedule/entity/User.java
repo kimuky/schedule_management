@@ -13,11 +13,4 @@ public class User {
     private String password;
     private String name;
     private String email;
-
-    public User(UserRequestDto dto) {
-        this.id = dto.getId();
-        this.password = dto.getPassword();
-        this.name = dto.getName();
-        this.email = dto.getEmail();
-    }
 }

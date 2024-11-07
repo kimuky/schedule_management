@@ -20,14 +20,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDto registerUser(UserRequestDto dto) {
 
-        User user = new User(dto);
-
-        int updatedRow = userRepository.registerUser(user);
+        int updatedRow = userRepository.registerUser(dto);
 
         if (updatedRow == 0) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디가 없습니다");
         }
 
-        return new UserResponseDto(user.getId());
+        return new UserResponseDto(dto.getId());
     }
 }
