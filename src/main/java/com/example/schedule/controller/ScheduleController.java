@@ -2,8 +2,10 @@ package com.example.schedule.controller;
 
 import com.example.schedule.dto.schedule.ScheduleRequestDto;
 import com.example.schedule.dto.schedule.ScheduleResponseDto;
+import com.example.schedule.exception.BadRequestException;
+import com.example.schedule.exception.ForbiddenException;
+import com.example.schedule.exception.NotFoundException;
 import com.example.schedule.service.schedule.ScheduleService;
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +33,6 @@ public class ScheduleController {
         return scheduleService.pagination(pageNum, pageSize);
     }
 
-
     @GetMapping
     public List<ScheduleResponseDto> findAllSchedules() {
         return scheduleService.findAllSchedules();
@@ -57,5 +58,21 @@ public class ScheduleController {
         scheduleService.deleteSchedule(id, dto.getUser_uid());
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<String> handleCustomException(BadRequestException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<String> handleCustomException(ForbiddenException e) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<String> handleCustomException(NotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
+
 
 }

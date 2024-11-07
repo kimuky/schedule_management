@@ -3,11 +3,12 @@ package com.example.schedule.service.schedule;
 import com.example.schedule.dto.schedule.ScheduleRequestDto;
 import com.example.schedule.dto.schedule.ScheduleResponseDto;
 import com.example.schedule.entity.Schedule;
+import com.example.schedule.exception.BadRequestException;
+import com.example.schedule.exception.ForbiddenException;
+import com.example.schedule.exception.NotFoundException;
 import com.example.schedule.repository.schedule.ScheduleRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -25,14 +26,13 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         // NOT NULL 에 대한 확인
         if (dto.getUser_uid() == null || dto.getTitle() == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "아이디 혹은 제목이 비워져 있습니다.");
+            throw new BadRequestException();
         }
 
-        // TODO 외래키가 올바른지에 대한 예외처리 해야함
         int scheduledRow = scheduleRepository.createSchedule(dto);
 
         if (scheduledRow == 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "일부 비워져있음");
+            throw new NotFoundException();
         }
 
         return new ScheduleResponseDto(dto.getUser_uid());
@@ -51,24 +51,25 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Transactional
     @Override
-    public ScheduleResponseDto updateSchedule(int id,String userUid, String title, String content, String color) {
+    public ScheduleResponseDto updateSchedule(int id, String userUid, String title, String content, String color) {
 
         Schedule beforeSchedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
 
         // 패스워드 대신 uid 로 구분
         if (!beforeSchedule.getUser_uid().equals(userUid)) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "해당 게시글 주인이 아님");
+            throw new ForbiddenException();
         }
 
         // 할일 작성자 말고 제목 내용 색깔
+        //TODO
         if (title == null || color == null || content == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "일부 비워져있음");
+            throw new BadRequestException();
         }
 
         int updatedRow = scheduleRepository.updateSchedule(id, title, content, color);
 
         if (updatedRow == 0) {
-            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "스케쥴이 없습니다");
+            throw new NotFoundException();
         }
 
         Schedule afterSchedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
@@ -83,13 +84,13 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         // 패스워드 대신 uid 로 구분
         if (!beforeSchedule.getUser_uid().equals(dto.getUser_uid())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "해당 게시글 주인이 아님");
+            throw new ForbiddenException();
         }
 
         int updatedRow = scheduleRepository.updateScheduleTitle(id, dto);
 
         if (updatedRow == 0) {
-            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "스케쥴이 없습니다");
+            throw new NotFoundException();
         }
         Schedule afterSchedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
 
@@ -101,26 +102,19 @@ public class ScheduleServiceImpl implements ScheduleService {
         Schedule beforeSchedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
 
         if (!beforeSchedule.getUser_uid().equals(userUid)) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "해당 게시글 주인이 아님");
+            throw new ForbiddenException();
         }
 
         int updatedRow = scheduleRepository.deleteScheduleTitle(id);
 
         if (updatedRow == 0) {
-            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "스케쥴이 없습니다");
+            throw new NotFoundException();
         }
     }
 
     @Override
     public List<ScheduleResponseDto> pagination(int pageNum, int pageSize) {
 
-        int scheduleSize =  findAllSchedules().size();
-
-//        if (pageNum > Math.ceil(scheduleSize/(double)pageSize)) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-//        }
-
-
-        return scheduleRepository.findFirstPageSchedules(pageNum,pageSize);
+        return scheduleRepository.findFirstPageSchedules(pageNum, pageSize);
     }
 }
