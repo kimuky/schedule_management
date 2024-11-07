@@ -115,6 +115,6 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public List<ScheduleResponseDto> pagination(int pageNum, int pageSize) {
 
-        return scheduleRepository.findFirstPageSchedules(pageNum, pageSize);
+        return scheduleRepository.findPageSchedules(pageNum, pageSize);
     }
 }

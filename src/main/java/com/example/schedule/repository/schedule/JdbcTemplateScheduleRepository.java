@@ -83,7 +83,7 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
     }
 
     @Override
-    public List<ScheduleResponseDto> findFirstPageSchedules(int pageNum, int pageSize) {
+    public List<ScheduleResponseDto> findPageSchedules(int pageNum, int pageSize) {
         return jdbcTemplate.query("SELECT * FROM schedule ORDER BY update_date DESC, id LIMIT ?,?", scheduleRowMapper(),(pageNum-1)*pageSize, pageSize);
 
     }
