@@ -9,7 +9,7 @@
 | 선택 일정 조회    |`GET`|/api/schedules/{schedule_id}| 요청 param, 요청 body |단건 응답 정보| 200: 정상 조회, 404: 일정이 사라짐, 404: 일정이 사라짐               |
 | 선택 일정 전체 수정 |`PUT`|/api/schedules/{schedule_id}| 요청 param, 요청 body |수정 정보| 200: 정상 수정, 400: 비정상 값, 403: 일정 주인이 아님, 404: 일정이 사라짐 |
 | 선택 일정 부분 수정 |`PUT`|/api/schedules/{schedule_id}| 요청 param, 요청 body |수정 정보| 200: 정상 수정, 400: 비정상 값, 403: 일정 주인이 아님, 404: 일정이 사라짐 |
-| 선택 일정 삭제    |`DELETE`|/api/schedules/{schedule_id}| 요청 param          | 삭제 정보 | 200: 정상 삭제, 403: 일정 주인이 아님, 404: 일정이 사라짐                             |
+| 선택 일정 삭제    |`DELETE`|/api/schedules/{schedule_id}| 요청 param, 요청 body | 삭제 정보 | 200: 정상 삭제, 403: 일정 주인이 아님, 404: 일정이 사라짐                             |
 
 <details>
   <summary><b>일정 생성</b></summary>
@@ -1042,7 +1042,7 @@
 
 ## ERD
 
-![img.png](img.png)
+![img_1.png](img_1.png)
 
 
 
