@@ -19,6 +19,7 @@ public class ScheduleResponseDto {
 
     public ScheduleResponseDto(ScheduleRequestDto dto) {
         this.user_uid = dto.getUser_uid();
+        this.user_name = dto.getUser_name();
         this.title = dto.getTitle();
         this.content = dto.getContent();
         this.color = dto.getColor();
@@ -32,6 +33,7 @@ public class ScheduleResponseDto {
         this.content = dto.getContent();
         this.color = dto.getColor();
         this.create_date = dto.getCreate_date();
+        this.update_date = dto.getUpdate_date();
     }
 
 }
