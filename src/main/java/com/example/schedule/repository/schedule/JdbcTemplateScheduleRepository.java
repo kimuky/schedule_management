@@ -35,12 +35,16 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository {
 
     @Override
     public List<ScheduleResponseDto> findAllSchedules() {
-        return jdbcTemplate.query("SELECT * FROM schedule ORDER BY update_date DESC, id", scheduleRowMapper());
+        return jdbcTemplate.query("SELECT user_uid, id, user_name, title, content, color, " +
+                "date_format(create_date, '%Y-%m-%d') AS create_date, date_format(update_date, '%Y-%m-%d') AS update_date " +
+                "FROM schedule ORDER BY update_date DESC, id", scheduleRowMapper());
     }
 
     @Override
     public Optional<Schedule> findScheduleById(int id) {
-        List<Schedule> result = jdbcTemplate.query("SELECT * FROM schedule WHERE id = ?", scheduleRowMapperV2(), id);
+        List<Schedule> result = jdbcTemplate.query("SELECT user_uid, id, user_name, title, content, color, " +
+                "date_format(create_date, '%Y-%m-%d') AS create_date, date_format(update_date, '%Y-%m-%d') AS update_date " +
+                " FROM schedule WHERE id = ?", scheduleRowMapperV2(), id);
         return result.stream().findAny();
     }
 
