@@ -1129,10 +1129,10 @@ SELECT  user_uid, id, user_name, title, content, color,
 -- Update schedules with id 1
 UPDATE schedule SET title = 'CS', content = 'Bean?', color = 'RED', update_date = CURRENT_DATE() WHERE id = 1;
 
--- PATCH schedules with id 1
+-- Patch schedules with id 1
 UPDATE schedule SET title = 'Security', content = 'SQL injection', update_date = CURRENT_DATE() WHERE id = 1;
 
--- PATCH schedules with id 1
+-- Patch schedules with id 1
 UPDATE schedule SET title = 'Exception', update_date = CURRENT_DATE() WHERE id = 1;
 ```
 
@@ -1150,7 +1150,7 @@ DELETE FROM schedule WHERE id = 1;
 - pageSize : 한 페이지의 크기 
 
 ```sql
--- Delete schedules with id 1
+-- Pagination
 SELECT * FROM schedule ORDER BY update_date DESC, id LIMIT pageNum,pageSize
 
 ```
