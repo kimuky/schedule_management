@@ -68,6 +68,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
 
         Schedule afterSchedule = scheduleRepository.findScheduleById(id).orElseThrow(NotFoundException::new);
+
         return new ScheduleResponseDto(afterSchedule);
     }
 
@@ -87,8 +88,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         if (updatedRow == 0) {
             throw new NotFoundException();
         }
-        Schedule afterSchedule = scheduleRepository.findScheduleById(id)
-                .orElseThrow(NotFoundException::new);
+        Schedule afterSchedule = scheduleRepository.findScheduleById(id).orElseThrow(NotFoundException::new);
 
         return new ScheduleResponseDto(afterSchedule);
     }

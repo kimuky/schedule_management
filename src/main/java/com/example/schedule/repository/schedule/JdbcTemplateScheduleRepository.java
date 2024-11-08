@@ -94,6 +94,7 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository {
                 return new ScheduleResponseDto(
                         rs.getString("user_uid"),
                         rs.getInt("id"),
+                        rs.getString("user_name"),
                         rs.getString("title"),
                         rs.getString("content"),
                         rs.getString("color"),
@@ -111,6 +112,7 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository {
                 return new Schedule(
                         rs.getString("user_uid"),
                         rs.getInt("id"),
+                        rs.getString("user_name"),
                         rs.getString("title"),
                         rs.getString("content"),
                         rs.getString("color"),

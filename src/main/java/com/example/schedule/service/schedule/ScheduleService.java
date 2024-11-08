@@ -2,6 +2,7 @@ package com.example.schedule.service.schedule;
 
 import com.example.schedule.dto.schedule.ScheduleRequestDto;
 import com.example.schedule.dto.schedule.ScheduleResponseDto;
+import com.example.schedule.entity.Schedule;
 
 import java.util.List;
 
