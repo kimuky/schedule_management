@@ -102,7 +102,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             throw new ForbiddenException();
         }
 
-        int updatedRow = scheduleRepository.deleteScheduleTitle(id);
+        int updatedRow = scheduleRepository.deleteSchedule(id);
 
         if (updatedRow == 0) {
             throw new NotFoundException();

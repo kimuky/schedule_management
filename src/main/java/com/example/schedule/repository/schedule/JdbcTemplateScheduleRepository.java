@@ -80,7 +80,7 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository {
     }
 
     @Override
-    public int deleteScheduleTitle(int id) {
+    public int deleteSchedule(int id) {
         return jdbcTemplate.update("DELETE FROM schedule WHERE id = ?", id);
     }
 
