@@ -18,7 +18,7 @@ public interface ScheduleRepository {
 
     int updateScheduleTitle(int id, ScheduleRequestDto dto);
 
-    int deleteScheduleTitle(int id);
+    int deleteSchedule(int id);
 
     List<ScheduleResponseDto> findPageSchedules(int pageNum, int pageSize);
 }
