@@ -9,6 +9,7 @@ public class Schedule {
 
     private String user_uid;
     private int id;
+    private String user_name;
     private String title;
     private String content;
     private String color;
